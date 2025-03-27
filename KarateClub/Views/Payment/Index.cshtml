@@ -1,0 +1,65 @@
+﻿@model IEnumerable<KarateClub.Core.Payment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fas fa-plus"></i> Create New
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentId)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.EmergencyContactInfo)
+            </td>
+       
+                <td>
+                    <div class="action-links">
+                        <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.PaymentId">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.PaymentId">
+                            <i class="fas fa-info-circle"></i> Details
+                        </a>
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.PaymentId" onclick="return confirm('Are you sure you want to delete this item?');">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </a>
+                    </div>
+                </td>
+
+        </tr>
+}
+    </tbody>
+</table>

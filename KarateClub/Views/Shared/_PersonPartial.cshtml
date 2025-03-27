@@ -1,0 +1,17 @@
+﻿@model KarateClub.Core.Person
+
+@if (Model != null)
+{
+    <div>
+        <strong>PersonId:</strong> @Model.PersonId <br />
+        <strong>Name:</strong> @Model.Name <br />
+        <strong>Contact Info:</strong> @Model.ContactInfo <br />
+        <strong>Address:</strong> @Model.Address <br />
+        <input type="number" id="personId3" value="@Model.PersonId" readonly />
+
+    </div>
+}
+else
+{
+    <div class="alert alert-warning">لا يوجد شخص بهذا ID.</div>
+}

@@ -1,0 +1,224 @@
+﻿@using KarateClub.Gloable
+@model IEnumerable<KarateClub.Core.User>
+
+@{
+
+   /*if (clsGloable._UserGloable == null)
+    {
+        RedirectToPage("/Account/Login");
+      //  context.Result = new RedirectToActionResult("Login", "Account", null);
+    }*/
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<p>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fas fa-plus"></i> Create New
+    </a>
+</p>
+
+
+<!-- DataTables Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="dataTables_length" id="dataTable_length">
+                        <label>
+                            Show
+                            <select id="countRows" class="custom-select custom-select-sm form-control form-control-sm">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select> entries
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div id="dataTable_filter" class="dataTables_filter">
+                        <label>Search:<input type="search" name="SearchItem" id="search2" class="deleteTest form-control form-control-sm" placeholder="" aria-controls="dataTable"></label>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <table class="table datatable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Person.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+                    <tbody id="results">
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserID)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+       
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+                <td>
+                  @Html.DisplayFor(modelItem => item.PersonId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Person.Name)
+                </td>
+  
+                <td>
+                                <div class="action-links">
+                                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.UserID">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.UserID">
+                                        <i class="fas fa-info-circle"></i> Details
+                                    </a>
+                                    <form asp-action="Delete" method="post" style="display:inline;"
+                                          onsubmit="return confirmDelete();" asp-route-id="@item.UserID">
+                                        <span class="btn btn-danger btn-sm">
+                                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            <i class="fas fa-trash-alt"></i>
+
+                                        </span>
+
+
+                                    </form>
+                                </div>
+                                </td>
+        </tr>
+}
+</tbody>
+                </table>
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers">
+                        <ul class="pagination">
+                            @{
+                                if (Model.ToList().Count < 10)
+                                {
+                                    int Id = 0;
+                                    <a asp-action="Index" asp-route-id="@Id">الصفحة الاولى</a>
+                                    ;
+
+                                }
+                                else
+                                {
+                                    <a asp-action="Index" asp-route-id="@Model.ToList().Last().UserID">التالي</a>
+                                    ;
+
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success msg">@TempData["Message"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger msg">@TempData["Error"]</div>
+}
+
+
+<script src="~/lib/jquery/jquery.js"></script>
+
+
+<script>
+
+    function confirmDelete() {
+        return confirm('Are you sure you want to delete the user?');
+
+    }
+
+    $(document).ready(function () {
+        $('#searchButton').click(function () {
+            var searchItem = $('#search').val();
+
+            $.ajax({
+                url: '@Url.Action("Search", "Person")', // تأكد من مسار الإجراء
+                type: 'POST',
+                data: { SearchItem: searchItem },
+                success: function (data) {
+                    $('#personData').html(data);
+                },
+                error: function () {
+                    alert('حدث خطأ أثناء البحث.');
+                }
+            });
+        });
+
+
+            $('#search2').on('input', function() {
+
+
+    var query = $(this).val();
+
+    $.ajax({
+
+    url: '/searchUser', // المسار إلى نقطة النهاية للبحث
+
+    method: 'GET',
+
+    data: { SearchItem: query },
+
+    success: function(data) {
+
+
+    $('#results').html(data);
+
+    },
+
+    error: function() {
+
+    $('#results').html('<tr><td colspan="3">حدث خطأ أثناء البحث.</td></tr>');
+
+    }
+
+    });
+
+    });
+
+
+    });
+</script>

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarateClub", "KarateClub.csproj", "{1DF388A8-6872-4FFE-AB70-C3DDD66BE778}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarateClub.Core", "..\KarateClub.Core\KarateClub.Core.csproj", "{4E843363-D6ED-4266-8365-43E22E91F59D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarateClub.Data", "..\KarateClub.Data\KarateClub.Data.csproj", "{CF848DB7-E75C-4FB7-B8B0-F8F37FEB4F51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DF388A8-6872-4FFE-AB70-C3DDD66BE778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DF388A8-6872-4FFE-AB70-C3DDD66BE778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DF388A8-6872-4FFE-AB70-C3DDD66BE778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DF388A8-6872-4FFE-AB70-C3DDD66BE778}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E843363-D6ED-4266-8365-43E22E91F59D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E843363-D6ED-4266-8365-43E22E91F59D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E843363-D6ED-4266-8365-43E22E91F59D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E843363-D6ED-4266-8365-43E22E91F59D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF848DB7-E75C-4FB7-B8B0-F8F37FEB4F51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF848DB7-E75C-4FB7-B8B0-F8F37FEB4F51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF848DB7-E75C-4FB7-B8B0-F8F37FEB4F51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF848DB7-E75C-4FB7-B8B0-F8F37FEB4F51}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

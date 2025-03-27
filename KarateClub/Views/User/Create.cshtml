@@ -1,0 +1,109 @@
+﻿@model KarateClub.Core.User
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row justify-content-center ml-5 mr-5">
+    <div class="card col-lg-6 mr-5">
+        <div class="card-body" style="width: 70%;">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PasswordHash" class="control-label"></label>
+                <input asp-for="PasswordHash" class="form-control" type="password"/>
+                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+            </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            <div class="form-group">
+                <label asp-for="Role" class="control-label"></label>
+                <input asp-for="Role" class="form-control" />
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonId" class="control-label"></label>
+                <input asp-for="PersonId" class="form-control" readonly id="pp"/>
+                <span asp-validation-for="PersonId" class="text-danger"></span>
+              
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+    <div class="card col-lg-4">
+        <div class="card-body">
+            <h3 class="card-title" style="color: #007bff;">بيانات الشخص:</h3>
+
+            <div class="form-group">
+                <label for="search">بحث الشخص بواسطة الرقم:</label>
+                <input type="text" name="SearchItem" id="search" class="form-control" placeholder="أدخل رقم الشخص" required />
+            </div>
+            <button class="btn btn-primary" id="searchButton3" >بحث</button>
+
+            <div id="personData" class="mt-3"></div>
+        </div>
+    </div>
+
+    <div id="personData" class="mt-3">
+        <!-- سيتم تحديث هذا الجزء بالنتائج -->
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="~/lib/jquery/jquery.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#searchButton3').click(function () {
+            var searchItem = $('#search').val();
+
+            if (!searchItem) {
+                alert('يرجى إدخال ID صالح.');
+                return;
+            }
+
+            $.ajax({
+                url: '/LoadPersons2', // تأكد من أن هذا يشير إلى Controller
+                type: 'GET',
+                data: { id: searchItem },
+                success: function (data) {
+                    $('#personData').html(data); // تحديث الجزء المحدد من الصفحة
+
+                    $("#pp").val($("#personId3").val());
+          
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText); // سجل الأخطاء
+                    alert('حدث خطأ أثناء البحث.'+xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

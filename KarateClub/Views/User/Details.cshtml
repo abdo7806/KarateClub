@@ -1,0 +1,69 @@
+﻿@model KarateClub.Core.User
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div class="row justify-content-center ml-5 mr-5">
+    <div class="card col-lg-6 mr-5">
+        <div class="card-body">
+            <h5 class="card-title">تفاصيل المستخدم</h5>
+            <dl class="row">
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Username)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Username)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.PasswordHash)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.PasswordHash)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Role)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Role)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.IsActive)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.IsActive)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Person)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Person.ContactInfo)</dd>
+
+                <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Id)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Id)</dd>
+            </dl>
+            <div class="mt-5">
+
+                <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@Model?.UserID">
+                    <i class="fas fa-edit"></i> Edite
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card col-lg-4">
+        <div class="card-body">
+            <h3 class="card-title" style="color: #007bff;">بيانات الشخص:</h3>
+            <div class="form-group">
+                <span style="color:black;">PersonId: @Model.PersonId</span>
+            </div>
+            <div class="form-group">
+                <span style="color:black;">Name: @Model.Person.Name</span>
+            </div>
+            <div class="form-group">
+                <span style="color:black;">ContactInfo: @Model.Person.ContactInfo</span>
+            </div>
+            <div class="form-group">
+                <span style="color:black;">Address: @Model.Person.Address</span>
+            </div>
+            <div class="mt-5">
+                <a class="btn btn-primary btn-sm" asp-controller="Person" asp-action="Edit" asp-route-id="@Model.PersonId">
+                    <i class="fas fa-edit"></i> Edite
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <a asp-action="index" class="btn btn-primary">
+            <i class="fas fa-arrow-left"></i> Back to List
+        </a>
+    </div>
+

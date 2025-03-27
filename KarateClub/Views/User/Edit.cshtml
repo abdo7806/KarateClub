@@ -1,0 +1,79 @@
+﻿@model KarateClub.Core.User
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row justify-content-center ml-5 mr-5">
+    <div class="card col-lg-6 mr-5">
+        <div class="card-body" style="width: 70%;">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="UserID" />
+                <input type="hidden" asp-for="PersonId" />
+                <input asp-for="PasswordHash" class="form-control" type="hidden"/>
+
+                <div class="form-group">
+                    <label asp-for="Username" class="control-label"></label>
+                    <input asp-for="Username" class="form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+          
+                <div class="form-group">
+                    <label asp-for="Role" class="control-label"></label>
+                    <input asp-for="Role" class="form-control" />
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card col-lg-4">
+        <div class="card-body">
+            <h3 class="card-title" style="color: #007bff;">
+                Person data:
+            </h3>
+            <div class="form-group">
+                <span style="color:black;">PersonId : @Model.PersonId</span>
+            </div>
+            <div class="form-group">
+                <span style="color:black;">Name: @Model.Person.Name</span>
+            </div>
+            <div class="form-group">
+                <span style="color:black;"> ContactInfo: @Model.Person.ContactInfo</span>
+            </div>
+            <div class="form-group">
+                <span style="color:black;">Address: @Model.Person.Address</span>
+            </div>
+            <div class="mt-5">
+                <a class="btn btn-primary btn-sm" asp-controller="Person" asp-action="Edit" asp-route-id="@Model.PersonId">
+                    <i class="fas fa-edit"></i> Edite
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <a asp-action="Index" class="btn btn-primary">
+            <i class="fas fa-arrow-left"></i> Back to List
+
+        </a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

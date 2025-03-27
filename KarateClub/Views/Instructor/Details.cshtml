@@ -1,0 +1,45 @@
+﻿@model KarateClub.Core.Instructor
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+
+<div class="card" style="width:50%;">
+    <div class="card-body">
+    <h4>Instructor</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.InstructorId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InstructorId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Person.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Person.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Qualification)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Qualification)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Person)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Person.ContactInfo)
+        </dd>
+    </dl>
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.InstructorId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

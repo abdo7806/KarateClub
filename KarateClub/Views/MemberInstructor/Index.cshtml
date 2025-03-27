@@ -1,0 +1,115 @@
+﻿@model IEnumerable<KarateClub.Core.MemberInstructor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fas fa-plus"></i> Create New
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member.Person.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InstructorId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Instructor.Person.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssignDate)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Member.Person.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InstructorId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Instructor.Person.Name)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssignDate)
+            </td>
+           
+            <td>
+                    <form asp-action="Delete" method="post" style="display:inline;"
+                          onsubmit="return confirmDelete();">
+                        <input type="hidden" name="MemberId" value="@item.MemberId" />
+                        <input type="hidden" name="InstructorId" value="@item.InstructorId" />
+                        <span class="btn btn-danger btn-sm">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            <i class="fas fa-trash-alt"></i>
+
+                        </span>
+
+                      
+                    </form>
+
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success msg">@TempData["Message"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger msg">@TempData["Error"]</div>
+}
+
+<script>
+    function confirmDelete() {
+        return confirm('Are you sure about deleting?');
+
+    }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.deleteTest').click(function() {
+            var row = $(this).closest('tr');
+            var testId = row.data('id');
+
+            if (confirm('هل أنت متأكد أنك تريد حذف هذا الاختبار؟')) {
+                $.ajax({
+                    url: '/YourController/DeleteTest/' + testId, // URL لنقطة نهاية الحذف
+                    type: 'DELETE',
+                    success: function(result) {
+                        // حذف الصف من الجدول
+                        row.remove();
+                        alert('تم حذف الاختبار بنجاح!');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('خطأ في حذف الاختبار:', error);
+                        alert('حدث خطأ أثناء حذف الاختبار.');
+                    }
+                });
+            }
+        });
+    });
+</script>

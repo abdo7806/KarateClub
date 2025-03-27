@@ -1,0 +1,245 @@
+﻿@using KarateClub.Gloable
+@model KarateClub.Core.ViewModel.DashboardViewModel
+
+
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">نظام نادي الكاراتيه</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-download fa-sm text-white-50"></i> توليد تقرير
+        </a>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- عدد الأعضاء -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">عدد الأعضاء</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.MemberCount</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- عدد المدربين -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">عدد المدربين</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.InstructorCount</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-chalkboard-teacher fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- عدد الاشتراكات -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">عدد الاشتراكات</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.SubscriptionCount</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file-invoice-dollar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- اختبارات الحزام المنجزة -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">اختبارات الحزام المنجزة</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.TestCount</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-trophy fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- المدفوعات المتأخرة -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">المدفوعات المتأخرة</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.PaymentDueCount</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-exclamation-circle fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Row for Charts -->
+    <div class="row">
+        <!-- الرسم البياني للأداء -->
+        <div class="col-xl-8 col-lg-7 mb-4">
+            <div class="card shadow">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">نظرة عامة على الأداء</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="myAreaChart2"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- مصادر الإيرادات -->
+        <div class="col-xl-4 col-lg-5 mb-4">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">مصادر الإيرادات</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-pie pt-4 pb-2">
+                        <canvas id="myPieChart2"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الرسم البياني العمودي -->
+        <div class="col-xl-8 col-lg-7 mb-4">
+            <div class="card shadow">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">نظرة عامة على الأداء</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="myBarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
+<script>
+    // رسم بياني دائري
+    var ctx = document.getElementById('myPieChart2').getContext('2d');
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.RevenueSources.Select(m => m.Name))),
+            datasets: [{
+                data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.RevenueSources.Select(m => m.Percentage))),
+                backgroundColor: [
+                    'rgba(78, 115, 223, 1)',
+                    'rgba(28, 200, 138, 1)',
+                    'rgba(54, 185, 204, 1)'
+                ],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            var label = tooltipItem.label || '';
+                            if (label) {
+                                label += ': ' + tooltipItem.raw + '%'; // إضافة النسبة
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // الرسم البياني للخريطة
+    var ctx = document.getElementById('myAreaChart2').getContext('2d');
+    var myAreaChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['الأعضاء', 'المدربين', 'الاختبارات', 'المدفوعات المتأخرة', 'الاشتراكات'],
+            datasets: [{
+                label: 'عدد الأعضاء',
+                data: [@Model.MemberCount, @Model.InstructorCount, @Model.TestCount, @Model.PaymentDueCount, @Model.SubscriptionCount],
+                backgroundColor: 'rgba(78, 115, 223, 0.2)',
+                borderColor: 'rgba(78, 115, 223, 1)',
+                borderWidth: 2,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // الرسم البياني العمودي
+    var ctx = document.getElementById('myBarChart').getContext('2d');
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['الأعضاء', 'المدربين', 'الاختبارات', 'المدفوعات المتأخرة', 'الاشتراكات'],
+            datasets: [{
+                label: 'عدد',
+                data: [@Model.MemberCount, @Model.InstructorCount, @Model.TestCount, @Model.PaymentDueCount, @Model.SubscriptionCount],
+                backgroundColor: 'rgba(78, 115, 223, 1)',
+                borderColor: 'rgba(78, 115, 223, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

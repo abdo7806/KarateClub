@@ -1,0 +1,95 @@
+﻿@model IEnumerable<KarateClub.Core.ViewModel.BeltTestBeltRankInstructorPaymentMemberPersonViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fas fa-plus"></i> Create New
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RankId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RankName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Result)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InstructorName)
+            </th>
+            <th >
+                @Html.DisplayNameFor(model => model.PaymentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            
+           <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RankId)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RankName)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Result)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InstructorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+                <td>
+                    <div class="action-links">
+                        <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.Id">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Id">
+                            <i class="fas fa-info-circle"></i> Details
+                        </a>
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete this item?');">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </a>
+                    </div>
+                </td>
+     
+        </tr>
+}
+    </tbody>
+</table>
